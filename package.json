@@ -1,5 +1,5 @@
 {
-  "name": "macro-auth-hooks",
+  "name": "@macro/auth-hooks",
   "version": "1.0.0",
   "description": "Hooks for implementing macro auth",
   "main": "index.js",
