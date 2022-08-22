@@ -1,12 +1,14 @@
-export let api: string;
+export let api: string = 'http://localhost:8080/graphql';
 
 export async function emailCode(email: string): Promise<boolean> {
   const res = await fetch(`${api}`, {
     method: 'POST',
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      query: `"mutation:{
-        login(input:{email:\"${email}\"})
-      }"`,
+      query: `
+        mutation {
+          login(input:{email:"${email}"})
+        }`,
     }),
   });
 
@@ -20,12 +22,13 @@ export async function verifyCode(
   const res = await fetch(`${api}`, {
     method: 'POST',
     body: JSON.stringify({
-      query: `"mutation:{
-        verify(input:{email:\"${email}\",code:\"${code}\"}){
-          sessionId
-          permissions
-        }
-      }"`,
+      query: `
+        mutation {
+          verify(input:{email:"${email}",code:"${code}"}) {
+            sessionId
+            permissions
+          }
+        }`,
     }),
   });
   return await res.json();
@@ -47,9 +50,10 @@ export async function logout(): Promise<boolean> {
   const res = await fetch(`${api}`, {
     method: 'POST',
     body: JSON.stringify({
-      query: `"mutation:{
-        logout()
-      }"`,
+      query: `
+        mutation {
+          logout()
+        }`,
     }),
   });
 
