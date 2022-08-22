@@ -3,18 +3,17 @@
     "target": "esnext",
     "module": "commonjs",
     "sourceMap": true,
-    "outDir": "./build",
+    "outDir": "./lib",
     "rootDir": "./src",
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "declaration": true
+    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
