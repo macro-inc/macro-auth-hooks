@@ -1,6 +1,6 @@
-export let api: string = 'http://localhost:8080/graphql';
+export let api: string;
 
-export async function emailCode(email: string): Promise<boolean> {
+async function emailCode(email: string): Promise<boolean | null> {
   const res = await fetch(`${api}`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -12,31 +12,42 @@ export async function emailCode(email: string): Promise<boolean> {
     }),
   });
 
-  return await res.json();
+  if (res.ok) {
+    return (await res.json()).data?.login;
+  }
+
+  return null;
 }
 
-export async function verifyCode(
+async function verifyCode(
   email: string,
   code: string,
-): Promise<{sessionId: string; permissions: string[]}> {
+): Promise<{sessionId: string; permissions: string[]} | null> {
   const res = await fetch(`${api}`, {
     method: 'POST',
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       query: `
-        mutation {
-          verify(input:{email:"${email}",code:"${code}"}) {
-            sessionId
-            permissions
-          }
-        }`,
+      mutation {
+        verify(input:{email:"${email}",code:"${code}"}){
+          permissions
+          sessionId
+        }
+      }`,
     }),
   });
-  return await res.json();
+
+  if (res.ok) {
+    return (await res.json()).data?.verify;
+  }
+
+  return null;
 }
 
-export async function permissions(): Promise<string[]> {
+async function permissions(): Promise<string[]> {
   const res = await fetch(`${api}`, {
     method: 'POST',
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       query: `{
         permissions
@@ -46,9 +57,10 @@ export async function permissions(): Promise<string[]> {
   return await res.json();
 }
 
-export async function logout(): Promise<boolean> {
+async function logout(): Promise<boolean> {
   const res = await fetch(`${api}`, {
     method: 'POST',
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       query: `
         mutation {
