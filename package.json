@@ -5,7 +5,8 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "tsc -p ./"
+    "build": "tsc -p ./",
+    "codegen": "graphql-codegen"
   },
   "files": [
     "lib/**/*"
@@ -21,6 +22,12 @@
   },
   "homepage": "https://github.com/coparse-inc/macro-auth-hooks#readme",
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.11.6",
+    "@graphql-codegen/gql-tag-operations-preset": "^1.5.4",
+    "@graphql-typed-document-node/core": "^3.1.1",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "graphql-tag": "^2.12.6"
   }
 }
