@@ -1,0 +1,6 @@
+schema: http://macro-gql-service-lb-dev-1915148084.us-east-1.elb.amazonaws.com/graphql
+documents:
+  - './src/index.ts'
+generates:
+  generated:
+    preset: gql-tag-operations-preset

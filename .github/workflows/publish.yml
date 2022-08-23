@@ -14,7 +14,10 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies and build
-        run: npm install && npm run build
+        run: |
+          npm install
+          npm run build
+          npm run codegen
       - name: Publish package on NPM
         run: npm publish --access public
         env:

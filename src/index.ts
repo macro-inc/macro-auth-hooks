@@ -1,78 +1,44 @@
-export let api: string;
+import _gql from "graphql-tag";
+import { createClient as _createClient } from "./fetchClient";
+import type { Gql } from "../generated/main";
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 
-async function emailCode(email: string): Promise<boolean | null> {
-  const res = await fetch(`${api}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      query: `
-        mutation {
-          login(input:{email:"${email}"})
-        }`,
-    }),
-  });
+const gql = _gql as Gql;
 
-  if (res.ok) {
-    return (await res.json()).data?.login;
+const emailCodeQ = gql(`
+  mutation sendCode($email: String!) {
+    login(input: { email: $email })
+}
+`);
+
+const verifyCodeQ = gql(`
+mutation verify($email: String! $code: String!) {
+  verify(input: { email: $email code: $code }) {
+    permissions
+    sessionId
+  }
+}
+`);
+
+const permissionsQ = gql(`
+  query permissions { permisssions }
+`);
+
+const logoutQ = gql(`mutation logout { logout }`);
+
+export function createClient(endpoint: string) {
+  const client = _createClient(endpoint);
+
+  function wrapQuery<TData, TVars>(q: TypedDocumentNode<TData, TVars>) {
+    return (args: TVars) => client(q, args);
   }
 
-  return null;
+  return {
+    emailCode: wrapQuery(emailCodeQ),
+    verifyCodeQ: wrapQuery(verifyCodeQ),
+    permissions: wrapQuery(permissionsQ),
+    logoutQ: wrapQuery(logoutQ),
+  };
 }
 
-async function verifyCode(
-  email: string,
-  code: string,
-): Promise<{sessionId: string; permissions: string[]} | null> {
-  const res = await fetch(`${api}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      query: `
-      mutation {
-        verify(input:{email:"${email}",code:"${code}"}){
-          permissions
-          sessionId
-        }
-      }`,
-    }),
-  });
 
-  if (res.ok) {
-    return (await res.json()).data?.verify;
-  }
-
-  return null;
-}
-
-async function permissions(): Promise<string[]> {
-  const res = await fetch(`${api}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      query: `{
-        permissions
-      }`,
-    }),
-  });
-  return await res.json();
-}
-
-async function logout(): Promise<boolean> {
-  const res = await fetch(`${api}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      query: `
-        mutation {
-          logout()
-        }`,
-    }),
-  });
-
-  return await res.json();
-}
-
-export function useMacroAuth(endpoint: string) {
-  api = endpoint;
-  return {emailCode, verifyCode, permissions, logout};
-}
