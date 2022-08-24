@@ -35,9 +35,9 @@ export function createClient(endpoint: string) {
 
   return {
     emailCode: wrapQuery(emailCodeQ),
-    verifyCodeQ: wrapQuery(verifyCodeQ),
+    verifyCode: wrapQuery(verifyCodeQ),
     permissions: wrapQuery(permissionsQ),
-    logoutQ: wrapQuery(logoutQ),
+    logout: wrapQuery(logoutQ),
   };
 }
 
