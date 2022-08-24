@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "commonjs",
+    "module": "ES6",
     "sourceMap": true,
-    "outDir": "./lib",
+    "outDir": "dist",
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "declaration": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": false
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/demo.tsx"]
 }

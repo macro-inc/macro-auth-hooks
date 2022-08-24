@@ -2,5 +2,5 @@ schema: http://macro-gql-service-lb-dev-1915148084.us-east-1.elb.amazonaws.com/g
 documents:
   - './src/index.ts'
 generates:
-  generated:
+  src/generated:
     preset: gql-tag-operations-preset

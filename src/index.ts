@@ -1,7 +1,7 @@
-import _gql from 'graphql-tag';
-import {createClient as _createClient} from './fetchClient';
-import type {Gql} from '../generated/main';
-import type {TypedDocumentNode} from '@graphql-typed-document-node/core';
+import _gql from "graphql-tag";
+import { createClient as _createClient } from "./fetchClient";
+import type { Gql } from "./generated/main";
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 
 const gql = _gql as Gql;
 
@@ -35,8 +35,8 @@ export function createClient(endpoint: string) {
 
   return {
     emailCode: wrapQuery(emailCodeQ),
-    verifyCodeQ: wrapQuery(verifyCodeQ),
+    verifyCode: wrapQuery(verifyCodeQ),
     permissions: wrapQuery(permissionsQ),
-    logoutQ: wrapQuery(logoutQ),
+    logout: wrapQuery(logoutQ),
   };
 }

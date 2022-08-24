@@ -20,6 +20,7 @@ export function createClient(endpoint: string) {
         variables,
       }),
       headers,
+      credentials: "include"
     });
     const res = await fetch(req);
     const json = await res.json();

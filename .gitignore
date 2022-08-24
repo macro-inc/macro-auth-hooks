@@ -6,9 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-generated/gql.ts
-generated/graphql.ts
-generated/index.ts
+src/generated/gql.ts
+src/generated/graphql.ts
+src/generated/index.ts
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
