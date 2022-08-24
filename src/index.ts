@@ -40,5 +40,3 @@ export function createClient(endpoint: string) {
     logout: wrapQuery(logoutQ),
   };
 }
-
-
