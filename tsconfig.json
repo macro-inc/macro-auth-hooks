@@ -7,6 +7,8 @@
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "declaration": true,
