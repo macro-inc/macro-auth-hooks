@@ -8,7 +8,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: 'macro-auth-hooks',
-      fileName: 'index'
+      formats: ["es"],
+      fileName: (format) => `index.${format}.js`
     },
   }
 })

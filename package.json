@@ -3,20 +3,20 @@
   "version": "1.0.3",
   "description": "Hooks for implementing macro auth",
   "type": "module",
-  "files": ["dist"],
-  "main": "./dist/index.cjs",
+  "files": [
+    "dist"
+  ],
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     }
   },
   "scripts": {
-    "build": "vite build",
+    "build": "graphql-codegen && vite build && tsc --emitDeclarationOnly",
     "codegen": "graphql-codegen",
-    "dev": "vite"
+    "dev": "concurrently \"vite\" \"graphql-codegen --watch\""
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "@graphql-codegen/gql-tag-operations-preset": "^1.5.4",
     "@graphql-typed-document-node/core": "^3.1.1",
     "babel-preset-solid": "^1.4.8",
+    "concurrently": "^7.3.0",
     "solid-js": "^1.4.8",
     "typescript": "^4.7.4",
     "vite": "^3.0.9",
