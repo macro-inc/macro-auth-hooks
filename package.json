@@ -1,6 +1,6 @@
 {
   "name": "@macroos/auth-hooks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Hooks for implementing macro auth",
   "type": "module",
   "files": [
