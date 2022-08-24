@@ -1,16 +1,16 @@
 {
   "name": "@macroos/auth-hooks",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Hooks for implementing macro auth",
   "type": "module",
   "files": [
     "dist"
   ],
-  "module": "./dist/index.js",
+  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.es.js"
     }
   },
   "scripts": {
