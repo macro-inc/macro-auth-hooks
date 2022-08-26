@@ -3,4 +3,6 @@ documents:
   - './src/index.ts'
 generates:
   src/generated:
+    config:
+      enumsAsTypes: true
     preset: gql-tag-operations-preset
