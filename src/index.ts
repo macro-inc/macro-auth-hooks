@@ -1,7 +1,7 @@
-import _gql from "graphql-tag";
-import { createClient as _createClient } from "./fetchClient";
-import type { Gql } from "./generated/main";
-import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
+import _gql from 'graphql-tag';
+import {createClient as _createClient} from './fetchClient';
+import type {Gql} from './generated/main';
+import type {TypedDocumentNode} from '@graphql-typed-document-node/core';
 
 const gql = _gql as Gql;
 
@@ -21,7 +21,11 @@ mutation verify($email: String! $code: String!) {
 `);
 
 const permissionsQ = gql(`
-  query permissions { permissions }
+  query permissions {
+    me {
+     permissions
+    }
+  }
 `);
 
 const logoutQ = gql(`mutation logout { logout }`);

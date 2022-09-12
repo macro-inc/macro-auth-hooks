@@ -1,4 +1,4 @@
-schema: http://macro-gql-service-lb-dev-1915148084.us-east-1.elb.amazonaws.com/graphql
+schema: https://d2bb4n1ehv93fs.cloudfront.net/graphql/
 documents:
   - './src/index.ts'
 generates:

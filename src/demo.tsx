@@ -1,23 +1,23 @@
-import { createResource, createSignal, Resource } from "solid-js";
-import { render } from "solid-js/web";
-import { createClient } from "./index";
+import {createResource, createSignal, Resource} from 'solid-js';
+import {render} from 'solid-js/web';
+import {createClient} from './index';
 
-const [email, setEmail] = createSignal("");
-const client = createClient("http://localhost:8080/graphql");
+const [email, setEmail] = createSignal('');
+const client = createClient('http://localhost:8080/graphql/');
 
 function formSubmit(
   ref: HTMLFormElement,
-  accessor: () => ((ref: HTMLFormElement) => any) | undefined
+  accessor: () => ((ref: HTMLFormElement) => any) | undefined,
 ) {
-  const cb = accessor() ?? (() => {})
-  ref.setAttribute("novalidate", "");
+  const cb = accessor() ?? (() => {});
+  ref.setAttribute('novalidate', '');
   ref.onsubmit = async (e) => {
     e.preventDefault();
     return await Promise.resolve(cb(ref));
   };
 }
 
-function Result(props: { data: Resource<any> }) {
+function Result(props: {data: Resource<any>}) {
   return (
     <div>
       <div>result: {JSON.stringify(props.data())}</div>
@@ -28,7 +28,7 @@ function Result(props: { data: Resource<any> }) {
 }
 
 function VerifyInput() {
-  const [code, setCode] = createSignal("");
+  const [code, setCode] = createSignal('');
   const buttonEnabled = () => code() && email();
   const [params, setParams] = createSignal<null | {
     email: string;
@@ -38,7 +38,7 @@ function VerifyInput() {
   const [data] = createResource(params, client.verifyCode);
 
   return (
-    <form use:formSubmit={() => setParams({ email: email(), code: code() })}>
+    <form use:formSubmit={() => setParams({email: email(), code: code()})}>
       <input
         type="text"
         placeholder="email"
@@ -60,7 +60,7 @@ function VerifyInput() {
 }
 
 function Permissions() {
-  const [data, { refetch }] = createResource(() => client.permissions({}));
+  const [data, {refetch}] = createResource(() => client.permissions({}));
 
   return (
     <form use:formSubmit={() => refetch()}>
@@ -79,4 +79,4 @@ function App() {
   );
 }
 
-render(() => <App />, document.getElementById("app") as HTMLElement);
+render(() => <App />, document.getElementById('app') as HTMLElement);
