@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 schema: https://d2bb4n1ehv93fs.cloudfront.net/graphql/
+=======
+schema: https://api.macro.com/graphql/
+>>>>>>> Stashed changes
 documents:
   - './src/index.ts'
 generates:
